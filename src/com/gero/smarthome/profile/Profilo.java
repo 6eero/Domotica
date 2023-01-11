@@ -16,8 +16,8 @@ public class Profilo {
         this.devicesOfTheProfile = devicesOfTheProfile;
     }
 
-    public List<Device> getDevicesOfTheProfile() {
-        return devicesOfTheProfile;
+    public String getNome() {
+        return nome;
     }
 
     public void profiloGiorno() throws Exception.DeviceOfflineException {
@@ -42,7 +42,4 @@ public class Profilo {
         }
     }
 
-    public String getNome() {
-        return nome;
-    }
 }
