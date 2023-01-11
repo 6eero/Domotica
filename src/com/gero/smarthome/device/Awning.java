@@ -1,3 +1,7 @@
+package com.gero.smarthome.device;
+
+import com.gero.smarthome.Device;
+import com.gero.smarthome.exceptions.Exception;
 import org.jetbrains.annotations.NotNull;
 
 public class Awning extends Device {
@@ -13,7 +17,7 @@ public class Awning extends Device {
     }
     
 
-    /**
+     /**
      * Method to send a command to a device (awnings)
      * @param device the awnings
      * @param command the command to send to the light
@@ -23,10 +27,10 @@ public class Awning extends Device {
 
         switch (command) {
             case "close the awnings" -> {
-                this.setState(device, true);
+                this.setState(device, false);
             }
             case "open the awnings" -> {
-                this.setState(device,false);
+                this.setState(device,true);
             }
         }
     }

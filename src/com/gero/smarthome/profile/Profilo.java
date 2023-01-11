@@ -1,3 +1,8 @@
+package com.gero.smarthome.profile;
+
+import com.gero.smarthome.Device;
+import com.gero.smarthome.exceptions.Exception;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +27,7 @@ public class Profilo {
             device.send(device, "set the lights to maximum brightness");
             device.send(device, "change color to white");
             device.send(device, "open the awnings");
+            device.send(device, "open the electric gate");
         }
     }
 
@@ -32,6 +38,7 @@ public class Profilo {
             device.send(device, "set the lights to minimum brightness");
             device.send(device, "change color to red");
             device.send(device, "close the awnings");
+            device.send(device, "close the electric gate");
         }
     }
 

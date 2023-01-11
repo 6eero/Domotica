@@ -1,3 +1,6 @@
+package com.gero.smarthome;
+
+import com.gero.smarthome.exceptions.Exception;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Device {
@@ -53,7 +56,4 @@ public abstract class Device {
      */
     public abstract void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException;
 
-
 }
-
-

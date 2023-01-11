@@ -1,3 +1,7 @@
+package com.gero.smarthome;
+
+import com.gero.smarthome.exceptions.Exception;
+import com.gero.smarthome.profile.Profilo;
 import org.jetbrains.annotations.NotNull;
 import java.util.*;
 

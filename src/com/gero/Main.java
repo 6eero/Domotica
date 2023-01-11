@@ -1,3 +1,13 @@
+package com.gero;
+
+import com.gero.smarthome.*;
+import com.gero.smarthome.exceptions.Exception;
+import com.gero.smarthome.device.Awning;
+import com.gero.smarthome.device.ElectricGate;
+import com.gero.smarthome.device.Light;
+import com.gero.smarthome.profile.Profili;
+import com.gero.smarthome.profile.Profilo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +20,19 @@ public class Main {
         Light light2 = new Light();
         Light light3 = new Light();
         Awning awning = new Awning();
+        ElectricGate electricGate = new ElectricGate();
 
         controlHub.addDevice(light1);
         controlHub.addDevice(light2);
         controlHub.addDevice(light3);
         controlHub.addDevice(awning);
+        controlHub.addDevice(electricGate);
 
         light1.connectToOnlineServices();
         light2.connectToOnlineServices();
         light3.connectToOnlineServices();
         awning.connectToOnlineServices();
+        electricGate.connectToOnlineServices();
 
 
         System.out.println(controlHub.statoImpianto());
@@ -27,6 +40,7 @@ public class Main {
         devicesList.add(light1);
         devicesList.add(light2);
         devicesList.add(awning);
+        devicesList.add(electricGate);
         System.out.println(controlHub.statoImpianto());
 
 
@@ -37,8 +51,9 @@ public class Main {
         System.out.println("light 1 brightness: " + light1.getBrightness());
         System.out.println("light 2 brightness: " + light2.getBrightness());
         System.out.println("awnings opened: " + awning.getState());
+        System.out.println("the gate is opened: " + electricGate.getState());
 
-        Profilo profilo = controlHub.creaProfilo("notte", devicesList);
+        Profilo profilo = controlHub.creaProfilo(String.valueOf(Profili.giorno), devicesList);
         controlHub.attivaProfilo(profilo);
 
         System.out.println();
@@ -48,6 +63,7 @@ public class Main {
         System.out.println("light 1 brightness: " + light1.getBrightness());
         System.out.println("light 2 brightness: " + light2.getBrightness());
         System.out.println("awnings opened: " + awning.getState());
+        System.out.println("the gate is opened: " + electricGate.getState());
 
 
 

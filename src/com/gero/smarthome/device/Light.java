@@ -1,6 +1,10 @@
+package com.gero.smarthome.device;
+
+import com.gero.smarthome.Device;
+import com.gero.smarthome.exceptions.Exception;
 import org.jetbrains.annotations.NotNull;
 
-public class Light extends Device{
+public class Light extends Device {
 
     private String color;
     private int brightness;
@@ -62,6 +66,7 @@ public class Light extends Device{
      * @param command the command to send to the light
      * @throws Exception.DeviceOfflineException if the device is offline
      */
+    @Override
     public void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
 
         switch (command) {
