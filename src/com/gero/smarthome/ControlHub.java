@@ -1,9 +1,13 @@
 package com.gero.smarthome;
 
 import com.gero.smarthome.exceptions.Exception;
-import com.gero.smarthome.profile.Profilo;
+import com.gero.smarthome.profile.Profile;
 import org.jetbrains.annotations.NotNull;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ControlHub {
 
@@ -14,7 +18,7 @@ public class ControlHub {
      * Method to add a device to the device list of the home
      * @param device the one to add
      */
-    public void addDevice(@NotNull Device device) {
+    public void addDeviceToTheHome(@NotNull Device device) {
         devicesList.add(device);
     }
 
@@ -55,30 +59,21 @@ public class ControlHub {
 
 
     /**
-     * Method to create a new profile
-     * @param nomeProfilo the name of the profile
-     * @param listaDispositivi the list of devices thate uses the profile
-     * @return a new profile, euqipped with a name and a list of devices
+     * Method to activate a profile
+     * @param devListOfAProfile device listof the profile
+     * @param profilo the profile to activate
+     * @throws Exception.DeviceOfflineException if some device in the list is offline
      */
-    public Profilo creaProfilo(@NotNull String nomeProfilo, @NotNull List<Device> listaDispositivi) {
-        return new Profilo(nomeProfilo, listaDispositivi);
+    public void attivaProfilo(ArrayList<Device> devListOfAProfile, @NotNull Profile profilo) throws Exception.DeviceOfflineException {
+        profilo.impostaProfilo(devListOfAProfile);
     }
 
 
     /**
-     * Method to activate a profile
-     * @param profilo the profile to activate
-     * @throws Exception.DeviceOfflineException if some devices is oflline
+     * Method to connect a device to the online services
+     * @param device the device to connect
      */
-    public void attivaProfilo(@NotNull Profilo profilo) throws Exception.DeviceOfflineException {
-
-        if (profilo.getNome().equals("giorno")) {
-            profilo.profiloGiorno();
-
-        } else if (profilo.getNome().equals("notte")) {
-            profilo.profiloNotte();
-        }
-
-
+    public void connectToOnlineServices(@NotNull Device device) {
+        device.connectToOnlineServices();
     }
 }

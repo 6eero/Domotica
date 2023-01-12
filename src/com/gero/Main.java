@@ -1,12 +1,12 @@
 package com.gero;
 
 import com.gero.smarthome.*;
+import com.gero.smarthome.device.Camera;
 import com.gero.smarthome.exceptions.Exception;
 import com.gero.smarthome.device.Awning;
 import com.gero.smarthome.device.ElectricGate;
 import com.gero.smarthome.device.Light;
-import com.gero.smarthome.profile.Profili;
-import com.gero.smarthome.profile.Profilo;
+import com.gero.smarthome.profile.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,26 +21,31 @@ public class Main {
         Light light3 = new Light();
         Awning awning = new Awning();
         ElectricGate electricGate = new ElectricGate();
+        Camera camera = new Camera();
 
-        controlHub.addDevice(light1);
-        controlHub.addDevice(light2);
-        controlHub.addDevice(light3);
-        controlHub.addDevice(awning);
-        controlHub.addDevice(electricGate);
+        controlHub.addDeviceToTheHome(light1);
+        controlHub.addDeviceToTheHome(light2);
+        controlHub.addDeviceToTheHome(light3);
+        controlHub.addDeviceToTheHome(awning);
+        controlHub.addDeviceToTheHome(electricGate);
+        controlHub.addDeviceToTheHome(camera);
 
-        light1.connectToOnlineServices();
-        light2.connectToOnlineServices();
-        light3.connectToOnlineServices();
-        awning.connectToOnlineServices();
-        electricGate.connectToOnlineServices();
+        controlHub.connectToOnlineServices(light1);
+        controlHub.connectToOnlineServices(light2);
+        controlHub.connectToOnlineServices(light3);
+        controlHub.connectToOnlineServices(awning);
+        controlHub.connectToOnlineServices(electricGate);
+        controlHub.connectToOnlineServices(camera);
 
 
         System.out.println(controlHub.statoImpianto());
-        List<Device> devicesList = new ArrayList<>();
-        devicesList.add(light1);
-        devicesList.add(light2);
-        devicesList.add(awning);
-        devicesList.add(electricGate);
+
+        ArrayList<Device> devListOfAProfile = new ArrayList<>();
+        devListOfAProfile.add(light1);
+        devListOfAProfile.add(light2);
+        devListOfAProfile.add(awning);
+        devListOfAProfile.add(electricGate);
+
         System.out.println(controlHub.statoImpianto());
 
 
@@ -52,9 +57,12 @@ public class Main {
         System.out.println("light 2 brightness: " + light2.getBrightness());
         System.out.println("awnings opened: " + awning.getState());
         System.out.println("the gate is opened: " + electricGate.getState());
+        System.out.println("the camera is on: " + camera.getState());
 
-        Profilo profilo = controlHub.creaProfilo(String.valueOf(Profili.giorno), devicesList);
-        controlHub.attivaProfilo(profilo);
+
+        //Profile profileNight = new ProfileNight(devListOfAProfile);
+        Profile profiloDay = new ProfileDay(devListOfAProfile);
+        controlHub.attivaProfilo(devListOfAProfile, profiloDay);
 
         System.out.println();
 
@@ -64,6 +72,7 @@ public class Main {
         System.out.println("light 2 brightness: " + light2.getBrightness());
         System.out.println("awnings opened: " + awning.getState());
         System.out.println("the gate is opened: " + electricGate.getState());
+        System.out.println("the camera is on: " + camera.getState());
 
 
 

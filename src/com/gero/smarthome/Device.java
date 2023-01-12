@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class Device {
 
     private boolean state;
-    private boolean onlineStatus;
+    private boolean onlineStatus;;
 
 
     /**
