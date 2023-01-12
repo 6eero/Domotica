@@ -9,5 +9,8 @@ public class Camera extends Device {
     @Override
     public void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
 
+        if (command.equals("turn on the camera")) {
+            this.setState(device, true);
+        }
     }
 }

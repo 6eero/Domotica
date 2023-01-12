@@ -14,7 +14,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception.DeviceOfflineException {
 
-        ControlHub controlHub = new ControlHub();
+        IControlHub controlHub = new ControlHub();
 
         Light light1 = new Light();
         Light light2 = new Light();
@@ -60,9 +60,9 @@ public class Main {
         System.out.println("the camera is on: " + camera.getState());
 
 
-        //Profile profileNight = new ProfileNight(devListOfAProfile);
-        Profile profiloDay = new ProfileDay(devListOfAProfile);
-        controlHub.attivaProfilo(devListOfAProfile, profiloDay);
+        Profile profileNight = new ProfileNight(devListOfAProfile);
+        //Profile profiloDay = new ProfileDay(devListOfAProfile);
+        controlHub.attivaProfilo(devListOfAProfile, profileNight);
 
         System.out.println();
 
@@ -73,10 +73,6 @@ public class Main {
         System.out.println("awnings opened: " + awning.getState());
         System.out.println("the gate is opened: " + electricGate.getState());
         System.out.println("the camera is on: " + camera.getState());
-
-
-
-
 
     }
 

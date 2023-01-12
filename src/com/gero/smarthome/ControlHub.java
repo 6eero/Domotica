@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControlHub {
+public class ControlHub implements IControlHub {
 
     private final List<Device> devicesList = new ArrayList<>();
 
@@ -18,6 +18,7 @@ public class ControlHub {
      * Method to add a device to the device list of the home
      * @param device the one to add
      */
+    @Override
     public void addDeviceToTheHome(@NotNull Device device) {
         devicesList.add(device);
     }
@@ -27,6 +28,7 @@ public class ControlHub {
      * Method to know which device is on and which is off
      * @return two lists, one with the devices on, the other with those off
      */
+    @Override
     public Map<String, List<Device>> statoImpianto() {
 
         Map<String, List<Device>> map = new HashMap<>();
@@ -53,6 +55,7 @@ public class ControlHub {
      * @param command the command to execute
      * @throws Exception.DeviceOfflineException if the device is offline
      */
+    @Override
     public void inviaComando(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
         device.send(device, command);
     }
@@ -64,6 +67,7 @@ public class ControlHub {
      * @param profilo the profile to activate
      * @throws Exception.DeviceOfflineException if some device in the list is offline
      */
+    @Override
     public void attivaProfilo(ArrayList<Device> devListOfAProfile, @NotNull Profile profilo) throws Exception.DeviceOfflineException {
         profilo.impostaProfilo(devListOfAProfile);
     }
@@ -73,6 +77,7 @@ public class ControlHub {
      * Method to connect a device to the online services
      * @param device the device to connect
      */
+    @Override
     public void connectToOnlineServices(@NotNull Device device) {
         device.connectToOnlineServices();
     }

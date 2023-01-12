@@ -26,6 +26,7 @@ public class ProfileNight implements Profile {
             device.send(device, "change color to red");
             device.send(device, "close the awnings");
             device.send(device, "close the electric gate");
+            device.send(device, "turn on the camera");
         }
     }
 }
