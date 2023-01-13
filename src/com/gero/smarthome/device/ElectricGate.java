@@ -21,21 +21,20 @@ public class ElectricGate extends Device {
 
     /**
      * Method to send a command to a device (gate)
-     * @param device the gate
      * @param command the command to send to the gate
      * @throws Exception.DeviceOfflineException if the device is offline
      */
     @Override
-    public void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
+    public void send(@NotNull String command) throws Exception.DeviceOfflineException {
 
         switch (command) {
 
             case "open the electric gate" -> {
-                this.setState(device, true);
+                this.setState(this, true);
             }
 
             case "close the electric gate" -> {
-                this.setState(device,false);
+                this.setState(this,false);
             }
 
         }

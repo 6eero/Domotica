@@ -57,7 +57,7 @@ public class ControlHub implements IControlHub {
      */
     @Override
     public void inviaComando(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
-        device.send(device, command);
+        device.send(command);
     }
 
 

@@ -19,18 +19,17 @@ public class Awning extends Device {
 
      /**
      * Method to send a command to a device (awnings)
-     * @param device the awnings
      * @param command the command to send to the light
      * @throws Exception.DeviceOfflineException if the device is offline
      */
-    public void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
+    public void send(@NotNull String command) throws Exception.DeviceOfflineException {
 
         switch (command) {
             case "close the awnings" -> {
-                this.setState(device, false);
+                this.setState(this, false);
             }
             case "open the awnings" -> {
-                this.setState(device,true);
+                this.setState(this,true);
             }
         }
     }

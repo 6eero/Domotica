@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 public class Camera extends Device {
 
     @Override
-    public void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
+    public void send(@NotNull String command) throws Exception.DeviceOfflineException {
 
         if (command.equals("turn on the camera")) {
-            this.setState(device, true);
+            this.setState(this, true);
         }
     }
 }

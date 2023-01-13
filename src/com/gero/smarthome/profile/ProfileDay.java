@@ -22,10 +22,10 @@ public class ProfileDay implements Profile {
         for (Device device : devicesOfTheProfile) {
 
             device.setState(device, true);
-            device.send(device, "set the lights to maximum brightness");
-            device.send(device, "change color to white");
-            device.send(device, "open the awnings");
-            device.send(device, "open the electric gate");
+            device.send("set the lights to maximum brightness");
+            device.send("change color to white");
+            device.send("open the awnings");
+            device.send("open the electric gate");
         }
     }
 }

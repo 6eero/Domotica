@@ -22,11 +22,11 @@ public class ProfileNight implements Profile {
         for (Device device : devicesOfTheProfile) {
 
             device.setState(device, true);
-            device.send(device, "set the lights to minimum brightness");
-            device.send(device, "change color to red");
-            device.send(device, "close the awnings");
-            device.send(device, "close the electric gate");
-            device.send(device, "turn on the camera");
+            device.send("set the lights to minimum brightness");
+            device.send("change color to red");
+            device.send("close the awnings");
+            device.send("close the electric gate");
+            device.send("turn on the camera");
         }
     }
 }

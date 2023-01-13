@@ -62,21 +62,20 @@ public class Light extends Device {
 
     /**
      * Method to send a command to a device (light)
-     * @param device the light
      * @param command the command to send to the light
      * @throws Exception.DeviceOfflineException if the device is offline
      */
     @Override
-    public void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException {
+    public void send(@NotNull String command) throws Exception.DeviceOfflineException {
 
         switch (command) {
 
             case "on" -> {
-                this.setState(device, true);
+                this.setState(this,  true);
             }
 
             case "off" -> {
-                this.setState(device,false);
+                this.setState(this,false);
             }
 
             case "set the lights to minimum brightness" -> {

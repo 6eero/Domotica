@@ -50,10 +50,9 @@ public abstract class Device {
 
     /**
      * Method to send a specific command to a device
-     * @param device the device which will execute the command
      * @param command the command to execute
      * @throws Exception.DeviceOfflineException if the device is offline
      */
-    public abstract void send(@NotNull Device device, @NotNull String command) throws Exception.DeviceOfflineException;
+    public abstract void send(@NotNull String command) throws Exception.DeviceOfflineException;
 
 }
