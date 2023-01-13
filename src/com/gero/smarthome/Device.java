@@ -1,58 +1,25 @@
 package com.gero.smarthome;
 
-import com.gero.smarthome.exceptions.Exception;
+import com.gero.smarthome.exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Device {
-
-    private boolean state;
-    private boolean onlineStatus;;
-
-
     /**
-     * Method to get the online status of a device
-     * @return true if the dev is online, false otherwise
+     * @return Device state
      */
-    public boolean getOnlineStaus() {
-        return onlineStatus;
-    }
-
+    @NotNull
+    public abstract String getState();
 
     /**
-     * Method to connect a device to the online services
-     */
-    public void connectToOnlineServices() {
-        this.onlineStatus = true;
-    }
-
-
-    /**
-     * Method to check if a device is on or off
-     * @return true if the device is on, off otherwise
-     */
-    public boolean getState() {
-        return state;
-    }
-
-
-    /**
-     * Method to turn on/off a device
-     * @param state true to turn on the device, false otherwise
-     */
-    public void setState(@NotNull Device device, boolean state) throws Exception.DeviceOfflineException {
-        if (device.getOnlineStaus()) {
-            this.state = state;
-        } else {
-            throw new Exception.DeviceOfflineException("The device must be online to be turned on!");
-        }
-    }
-
-
-    /**
-     * Method to send a specific command to a device
+     * Send a command to this device
+     *
      * @param command the command to execute
-     * @throws Exception.DeviceOfflineException if the device is offline
+     * @throws ExecutionFailedException if the device cannot execute the command (or it is not online)
      */
-    public abstract void send(@NotNull String command) throws Exception.DeviceOfflineException;
+    abstract void sendCommand(@NotNull String command) throws ExecutionFailedException;
 
+    @Override
+    public String toString() {
+        return getState();
+    }
 }

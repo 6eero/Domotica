@@ -1,21 +1,15 @@
 package com.gero;
 
 import com.gero.smarthome.*;
-import com.gero.smarthome.device.Camera;
-import com.gero.smarthome.exceptions.Exception;
-import com.gero.smarthome.device.Awning;
-import com.gero.smarthome.device.ElectricGate;
-import com.gero.smarthome.device.Light;
-import com.gero.smarthome.profile.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.gero.smarthome.exceptions.*;
+import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws Exception.DeviceOfflineException {
-
+    public static void main(String[] args) {
+        // istanzia nuovo hub
         IControlHub controlHub = new ControlHub();
 
+        // crea alcuni device
         Light light1 = new Light();
         Light light2 = new Light();
         Light light3 = new Light();
@@ -23,57 +17,48 @@ public class Main {
         ElectricGate electricGate = new ElectricGate();
         Camera camera = new Camera();
 
-        controlHub.addDeviceToTheHome(light1);
-        controlHub.addDeviceToTheHome(light2);
-        controlHub.addDeviceToTheHome(light3);
-        controlHub.addDeviceToTheHome(awning);
-        controlHub.addDeviceToTheHome(electricGate);
-        controlHub.addDeviceToTheHome(camera);
+        controlHub.configuraCasa(Arrays.asList(light1, light2, light3, awning, electricGate, camera));
 
-        controlHub.connectToOnlineServices(light1);
-        controlHub.connectToOnlineServices(light2);
-        controlHub.connectToOnlineServices(light3);
-        controlHub.connectToOnlineServices(awning);
-        controlHub.connectToOnlineServices(electricGate);
-        controlHub.connectToOnlineServices(camera);
+        Profile profilo1 = new SmarthomeProfile("Profilo 1");
+        profilo1.addCommand(light1, "brightness:high");
+        profilo1.addCommand(light2, "brightness:low");
+        profilo1.addCommand(light3, "brightness:high");
+        profilo1.addCommand(awning, "open");
 
+        Profile profilo2 = new SmarthomeProfile("Profilo 2");
+        profilo2.addCommand(light1, "brightness:low");
+        profilo2.addCommand(light2, "brightness:low");
+        profilo2.addCommand(light3, "brightness:high");
+        profilo2.addCommand(awning, "close");
 
-        System.out.println(controlHub.statoImpianto());
-
-        ArrayList<Device> devListOfAProfile = new ArrayList<>();
-        devListOfAProfile.add(light1);
-        devListOfAProfile.add(light2);
-        devListOfAProfile.add(awning);
-        devListOfAProfile.add(electricGate);
-
-        System.out.println(controlHub.statoImpianto());
+        controlHub.aggiungiProfilo(profilo1);
+        controlHub.aggiungiProfilo(profilo2);
 
 
-        System.out.println();
+        System.out.println("Stato iniziale: " + controlHub.statoImpianto());
 
-        System.out.println("light 1 color: " + light1.getColor());
-        System.out.println("light 2 color: " + light2.getColor());
-        System.out.println("light 1 brightness: " + light1.getBrightness());
-        System.out.println("light 2 brightness: " + light2.getBrightness());
-        System.out.println("awnings opened: " + awning.getState());
-        System.out.println("the gate is opened: " + electricGate.getState());
-        System.out.println("the camera is on: " + camera.getState());
+        try {
+            controlHub.inviaComando(light1, "color:#f00");
+        } catch (ExecutionFailedException e) {
+            System.out.println("light1 non ha eseguito il comando");
+        }
+        System.out.println("Dopo 1 comando: " + controlHub.statoImpianto());
 
 
-        Profile profileNight = new ProfileNight(devListOfAProfile);
-        //Profile profiloDay = new ProfileDay(devListOfAProfile);
-        controlHub.attivaProfilo(devListOfAProfile, profileNight);
+        try {
+            controlHub.attivaProfilo("Profilo 1");
+        } catch (ExecutionFailedException e) {
+            System.out.println("Errore: alcuni device non hanno eseguito i comandi:\n\t" + e.getMessage());
+        }
 
-        System.out.println();
+        System.out.println("Profilo 1: " + controlHub.statoImpianto());
 
-        System.out.println("light 1 color: " + light1.getColor());
-        System.out.println("light 2 color: " + light2.getColor());
-        System.out.println("light 1 brightness: " + light1.getBrightness());
-        System.out.println("light 2 brightness: " + light2.getBrightness());
-        System.out.println("awnings opened: " + awning.getState());
-        System.out.println("the gate is opened: " + electricGate.getState());
-        System.out.println("the camera is on: " + camera.getState());
+        try {
+            controlHub.attivaProfilo("Profilo 2");
+        } catch (ExecutionFailedException e) {
+            System.out.println("Errore: alcuni device non hanno eseguito i comandi:\n\t" + e.getMessage());
+        }
 
+        System.out.println("Profilo 2: " + controlHub.statoImpianto());
     }
-
 }
