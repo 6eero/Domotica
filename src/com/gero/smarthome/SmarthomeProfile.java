@@ -2,13 +2,10 @@ package com.gero.smarthome;
 
 import com.gero.smarthome.exceptions.ExecutionFailedException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SmarthomeProfile implements Profile {
-    private final Map<Device, List<String>> commands;
+    private final Map<Device, Set<String>> commands;
     private final String name;
 
     public SmarthomeProfile(String name) {
@@ -34,11 +31,9 @@ public class SmarthomeProfile implements Profile {
 
     @Override
     public boolean addCommand(Device device, String command) {
-        List<String> deviceCommands = commands.get(device);
+        Set<String> deviceCommands = commands.get(device);
         if (deviceCommands == null) {
-            deviceCommands = new ArrayList<>(1);
-            deviceCommands.add(command);
-            commands.put(device, deviceCommands);
+            commands.put(device, new LinkedHashSet<>(Collections.singletonList(command)));
             return true;
         }
 
@@ -53,7 +48,7 @@ public class SmarthomeProfile implements Profile {
 
     @Override
     public boolean removeCommand(Device device, String command) {
-        List<String> deviceCommands = commands.get(device);
+        Set<String> deviceCommands = commands.get(device);
         if (deviceCommands == null)
             return false;
 

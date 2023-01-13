@@ -26,6 +26,11 @@ public interface IControlHub {
      */
     void inviaComando(@NotNull Device device, @NotNull String command) throws ExecutionFailedException;
 
+    /**
+     * Adds a new profile
+     * @param p Profile
+     * @return True if this control hub can add this profile
+     */
     boolean aggiungiProfilo(Profile p);
 
     /**

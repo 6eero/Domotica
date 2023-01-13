@@ -25,6 +25,7 @@ public interface Profile {
      * Adds a command to a device
      * @param device Device, if not present it will be added
      * @param command Command
+     * @return True if the command can be added
      */
     boolean addCommand(Device device, String command);
 
