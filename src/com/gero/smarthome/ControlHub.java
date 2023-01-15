@@ -3,7 +3,8 @@ package com.gero.smarthome;
 import com.gero.smarthome.exceptions.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControlHub implements IControlHub {
     private final List<Device> devicesList = new ArrayList<>();

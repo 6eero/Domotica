@@ -1,7 +1,8 @@
 package com.gero;
 
 import com.gero.smarthome.*;
-import com.gero.smarthome.exceptions.*;
+import com.gero.smarthome.exceptions.ExecutionFailedException;
+
 import java.util.Arrays;
 
 public class Main {
@@ -10,20 +11,31 @@ public class Main {
         IControlHub controlHub = new ControlHub();
 
         // crea alcuni device
-        Light light1 = new Light();
-        Light light2 = new Light();
-        Light light3 = new Light();
-        Awning awning = new Awning();
-        ElectricGate electricGate = new ElectricGate();
-        Camera camera = new Camera();
+        Device light1 = new Light();
+        Device light2 = new Light();
+        Device light3 = new Light();
+        Device awning = new Awning();
+        Device electricGate = new ElectricGate();
+        Device camera = new Camera();
+        Device plug = new SmartPlug();
 
-        controlHub.configuraCasa(Arrays.asList(light1, light2, light3, awning, electricGate, camera));
+        controlHub.configuraCasa(Arrays.asList(
+                light1,
+                light2,
+                light3,
+                awning,
+                electricGate,
+                camera,
+                plug
+        ));
 
         Profile profilo1 = new SmarthomeProfile("Profilo 1");
         profilo1.addCommand(light1, "brightness:high");
         profilo1.addCommand(light2, "brightness:low");
         profilo1.addCommand(light3, "brightness:high");
         profilo1.addCommand(awning, "open");
+        profilo1.addCommand(electricGate, "open");
+        profilo1.addCommand(plug, "on");
 
         Profile profilo2 = new SmarthomeProfile("Profilo 2");
         profilo2.addCommand(light1, "brightness:low");
@@ -36,14 +48,14 @@ public class Main {
 
 
         System.out.println("Stato iniziale: " + controlHub.statoImpianto());
-
+/*
         try {
             controlHub.inviaComando(light1, "color:#f00");
         } catch (ExecutionFailedException e) {
             System.out.println("light1 non ha eseguito il comando");
         }
         System.out.println("Dopo 1 comando: " + controlHub.statoImpianto());
-
+*/
 
         try {
             controlHub.attivaProfilo("Profilo 1");
